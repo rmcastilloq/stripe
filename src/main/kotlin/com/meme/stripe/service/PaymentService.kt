@@ -1,12 +1,13 @@
 package com.meme.stripe.service
 
+import com.meme.stripe.repository.MessageRepository
 import org.springframework.stereotype.Service
 
 @Service
-class PaymentService {
+class PaymentService(private val messageRepository: MessageRepository) {
 
     fun getHelloWorld(): String {
-        return "Hello World"
+        val messageEntity = messageRepository.findFirstByOrderByIdAsc()
+        return messageEntity?.message ?: "No message found"
     }
-
 }
